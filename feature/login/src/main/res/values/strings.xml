@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_ogin">Вход</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Пароль</string>
+    <string name="action_login">Вход</string>
+    <string name="login_no_account">Нету аккаунта?</string>
+    <string name="login_register">Регистрация</string>
+    <string name="login_forgot_pass">Забыл пароль</string>
+</resources>
