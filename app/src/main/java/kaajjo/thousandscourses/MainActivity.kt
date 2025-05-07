@@ -4,14 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,7 +28,6 @@ import kaajjo.thousandscourses.account.destinations.AccountScreenDestination
 import kaajjo.thousandscourses.domain.repository.SettingsRepository
 import kaajjo.thousandscourses.login.screen.LoginNavigator
 import kaajjo.thousandscourses.login.screen.destinations.LoginScreenDestination
-import kaajjo.thousandscourses.main.MainViewModel
 import kaajjo.thousandscourses.main.screen.MainNavigator
 import kaajjo.thousandscourses.main.screen.destinations.MainScreenDestination
 import kaajjo.thousandscourses.onboarding.screen.OnboardingNavigator
@@ -43,12 +39,12 @@ import kaajjo.thousandscourses.ui.icon.BookmarkBar
 import kaajjo.thousandscourses.ui.icon.Home
 import ru.smarttech.favorite.FavoriteNavigator
 import ru.smarttech.favorite.destinations.FavoriteScreenDestination
-import java.util.prefs.Preferences
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject lateinit var settingsRepository: SettingsRepository
+    @Inject
+    lateinit var settingsRepository: SettingsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,8 +110,8 @@ class MainActivity : ComponentActivity() {
                         }
                     ) { innerPadding ->
                         DestinationsNavHost(
-                            navGraph = MainNavGraph(firstLaunch.value),
-                            startRoute = OnBoardingScreenDestination,
+                            navGraph = MainNavGraph,
+                            startRoute = LoginScreenDestination,
                             engine = engine,
                             navController = navController,
                             dependenciesContainerBuilder = {
@@ -141,7 +137,7 @@ class MainActivity : ComponentActivity() {
 }
 
 
-class MainNavGraph(firstLaunch: Boolean) : NavGraphSpec {
+object MainNavGraph : NavGraphSpec {
     override val route = "root"
 
     override val startRoute = LoginScreenDestination
